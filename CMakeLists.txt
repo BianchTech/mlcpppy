@@ -10,7 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Biblioteca mlcpppy
 # -------------------------------
 file(GLOB_RECURSE MLCPP_SOURCES src/*.cpp src/*/*.cpp src/*/*/*.cpp)
-add_library(mlcpppy STATIC ${MLCPP_SOURCES})
+add_library(mlcpppy SHARED ${MLCPP_SOURCES})
 
 # Inclui os headers da biblioteca
 target_include_directories(mlcpppy PUBLIC ${PROJECT_SOURCE_DIR}/include)
