@@ -15,23 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "nearest_neighbor.h"
 #include <vector>
 
-class KDTree : public NearestNeighbor
+class NearestNeighbor
 {
-private:
-    std::vector<std::vector<int>> points;
-    class Node;
-    Node* root;
-    Node* Build(std::vector<std::vector<int>> points, int depth);
-    void Inorder(Node* root);
 public:
-    KDTree();
-    void Insert(std::vector<int> point) override;
-    void BuildTree(std::vector<std::vector<int>> points) override;
-    std::vector<std::vector<int>> KNearestNeighbor(std::vector<int> target_points, int k) override;
-    void PrintInorder();
-
- ~KDTree();
+    virtual ~NearestNeighbor() = default;
+    virtual std::vector<std::vector<int>> KNearestNeighbor(std::vector<int>, int) = 0;
+    virtual void Insert(std::vector<int>) = 0;
+    virtual void BuildTree(std::vector<std::vector<int>>) = 0;
+    virtual void Delete(std::vector<int>){};
 };
