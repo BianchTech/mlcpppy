@@ -15,7 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "mlcpppy/classifiers/neighbors/kdtree.h"
-
-KDTree::KDTree() {}
-KDTree::~KDTree() {}
+class Classifier {
+public:
+    virtual void train() = 0;
+    virtual int predict() = 0;
+    virtual ~Classifier() {}
+};
