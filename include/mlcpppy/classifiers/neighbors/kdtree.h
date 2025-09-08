@@ -14,24 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+#ifndef KDTREE_H
+#define KDTREE_H
 
-#include "nearest_neighbor.h"
 #include <vector>
+#include "nearest_neighbor.h"
 
-class KDTree : public NearestNeighbor
-{
-private:
-    std::vector<std::vector<int>> points;
-    class Node;
-    Node* root;
-    Node* Build(std::vector<std::vector<int>> points, int depth);
-    void Inorder(Node* root);
-public:
-    KDTree();
-    void Insert(std::vector<int> point) override;
-    void BuildTree(std::vector<std::vector<int>> points) override;
-    std::vector<std::vector<int>> KNearestNeighbor(std::vector<int> target_points, int k) override;
-    void PrintInorder();
+class KDTree : public NearestNeighbor {
+ private:
+  std::vector<std::vector<int>> points;
+  class Node;
+  Node* root;
+  Node* Build(std::vector<std::vector<int>> points, int depth);
+  static void Inorder(Node* root);
 
- ~KDTree();
+ public:
+  KDTree();
+  void Insert(std::vector<int> point) override;
+  void BuildTree(std::vector<std::vector<int>> points) override;
+  std::vector<std::vector<int>> KNearestNeighbor(std::vector<int> target_points,
+                                                 int k) override;
+  void PrintInorder();
+
+  ~KDTree() override;
 };
+#endif  // KDTREE_H

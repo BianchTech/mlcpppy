@@ -14,10 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
+#ifndef CLASSIFIER_H
+#define CLASSIFIER_H
 class Classifier {
-public:
-    virtual void train() = 0;
-    virtual int predict() = 0;
-    virtual ~Classifier() {}
+ public:
+  virtual void train() = 0;
+  virtual int predict() = 0;
+  virtual ~Classifier() {}
 };
+#endif  // CLASSIFIER_H
