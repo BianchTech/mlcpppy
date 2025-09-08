@@ -14,15 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
+#ifndef NEAREST_NEIGHBOR_H
+#define NEAREST_NEIGHBOR_H
 #include <vector>
 
-class NearestNeighbor
-{
-public:
-    virtual ~NearestNeighbor() = default;
-    virtual std::vector<std::vector<int>> KNearestNeighbor(std::vector<int>, int) = 0;
-    virtual void Insert(std::vector<int>) = 0;
-    virtual void BuildTree(std::vector<std::vector<int>>) = 0;
-    virtual void Delete(std::vector<int>){};
+class NearestNeighbor {
+ public:
+  virtual ~NearestNeighbor() = default;
+  virtual std::vector<std::vector<int>> KNearestNeighbor(std::vector<int>,
+                                                         int) = 0;
+  virtual void Insert(std::vector<int>) = 0;
+  virtual void BuildTree(std::vector<std::vector<int>>) = 0;
+  virtual void Delete(std::vector<int>){};
 };
+#endif  // NEAREST_NEIGHBOR_H

@@ -14,12 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+#ifndef KNN_H
+#define KNN_H
+
 #include "classifier.h"
 
 class KNN : Classifier {
-private:
-
-public:
-    KNN(/* args */);
-    ~KNN();
+ private:
+ public:
+  KNN(/* args */);
+  ~KNN();
 };
+#endif  // KNN_H
