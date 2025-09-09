@@ -3,7 +3,8 @@
 
 int main(int argc, char const *argv[])
 {
-    int x, y, k;
+    double x, y;
+    int k;
     if (argc < 4) {
         std::cerr << "Uso: " << argv[0] << " <x> <y> <k>\n";
         x = 7;
@@ -16,24 +17,24 @@ int main(int argc, char const *argv[])
         k = std::atoi(argv[3]);
     }
 
-    std::vector<std::vector<int>> points = {
-        {1, 2},
-        {2, 1},
-        {3, 2},
-        {7, 4},
-        {5, 9},
-        {6, 1},
-        {0, 3},
-        {4, 7},
-        {8, 2},
-        {3, 5}
+    std::vector<Point<double, 2>> points = {
+        {1.0, 2.0},
+        {2.0, 1.0},
+        {3.0, 2.0},
+        {7.0, 4.0},
+        {5.0, 9.0},
+        {6.0, 1.0},
+        {0.0, 3.0},
+        {4.0, 7.0},
+        {8.0, 2.0},
+        {3.0, 5.0}
     };
 
     auto tree = new KDTree();
     tree->BuildTree(points);
     tree->PrintInorder();
 
-    std::vector<std::vector<int>> points_knn = tree->KNearestNeighbor({x, y}, k);
+    std::vector<std::vector<int>> points_knn = tree->KNearestNeighbor(Point<double, 2>({x, y}), k);
 
     for (size_t i = 0; i < points_knn.size(); ++i) {
         std::cout << "Point " << i << ": ";

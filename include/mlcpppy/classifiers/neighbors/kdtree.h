@@ -19,28 +19,31 @@
 
 #include <vector>
 #include <queue>
+
 #include "nearest_neighbor.h"
 
-class KDTree : public NearestNeighbor {
+template <typename T = double, size_t N = 3>
+class KDTree : public NearestNeighbor<T, N> {
  private:
+  using PointType = typename NearestNeighbor<T, N>::PointType;
   class Node;
   Node* root_;
   int K_;
   std::priority_queue<std::pair<double, Node*>> bests_;
 
-  Node* Build(std::vector<std::vector<int>> points, int depth);
-  Node* NearestNeighbor(Node* root, std::vector<int>& target, int depth);
-  void KNearestNeighbor(Node* root, std::vector<int>& target, int depth);
+  Node* Build(std::vector<PointType> points, int depth);
+  Node* NearestNeighbor(Node* root, const PointType& target, int depth);
+  void KNearestNeighbor(Node* root, const PointType& target, int depth);
 
-  Node* Closest(Node* n0, Node* n1, std::vector<int>& target);
-  double DistSquared(const std::vector<int>& p0, const std::vector<int>& p1);
+  Node* Closest(Node* n0, Node* n1, const PointType& target);
+  double DistSquared(const PointType& p0, const PointType& p1);
   static void Inorder(Node* root);
 
  public:
   KDTree();
-  void Insert(std::vector<int> point) override;
-  void BuildTree(std::vector<std::vector<int>> points) override;
-  std::vector<std::vector<int>> KNearestNeighbor(std::vector<int> target_points, int k) override;
+  void Insert(const PointType& point) override;
+  void BuildTree(const std::vector<PointType>& points) override;
+  std::vector<PointType> KNearestNeighbor(const PointType& target_points, int k) override;
   void PrintInorder();
 
   ~KDTree() override;
