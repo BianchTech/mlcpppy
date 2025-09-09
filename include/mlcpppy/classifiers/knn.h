@@ -20,9 +20,9 @@
 #include "classifier.h"
 
 class KNN : Classifier {
- private:
- public:
-  KNN(/* args */);
-  ~KNN();
+       private:
+       public:
+        KNN(/* args */);
+        ~KNN();
 };
 #endif  // KNN_H

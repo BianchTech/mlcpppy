@@ -17,28 +17,29 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include <type_traits>
+#include <array>
 #include <initializer_list>
 #include <stdexcept>
-#include <array>
+#include <type_traits>
 
-template <typename T = double, size_t N = 3, typename = typename std::enable_if<std::is_floating_point<T>::value>::type>
+template <typename T = double, size_t N = 3,
+          typename =
+              typename std::enable_if<std::is_floating_point<T>::value>::type>
 class Point {
-private:
-    std::array<T, N> data_;
-public:
-    explicit Point() : data_{} {}
-    explicit Point(const std::array<T, N>& data) : data_(data) {}
-    inline Point(std::initializer_list<T> list) {
-        if (list.size() != N) {
-            throw std::invalid_argument("Initializer list size must match Point dimension");
+       private:
+        std::array<T, N> data_;
+
+       public:
+        explicit Point() : data_{} {}
+        explicit Point(const std::array<T, N> &data) : data_(data) {}
+        inline Point(std::initializer_list<T> list) {
+                if (list.size() != N) {
+                        throw std::invalid_argument(
+                            "Initializer list size must match Point dimension");
+                }
+                std::copy(list.begin(), list.end(), data_.begin());
         }
-        std::copy(list.begin(), list.end(), data_.begin());
-    }
-    const std::array<T, N>& data() const { return data_; }
+        const std::array<T, N> &data() const { return data_; }
 };
-
-
-
 
 #endif
