@@ -2,14 +2,13 @@ name: Check PR source branch
 
 on:
   pull_request:
-    branches:
-      - main
 
 jobs:
   check-branch:
     runs-on: ubuntu-latest
     steps:
       - name: Verify PR source
+        if: github.base_ref == 'main'
         run: |
           if [ "${{ github.head_ref }}" != "develop" ]; then
             echo "PRs to main must come from develop"
