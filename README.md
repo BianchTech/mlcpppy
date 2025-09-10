@@ -23,6 +23,8 @@ The main motivation of this project is to create a **research tool** that:
 * Pedro Bianchini de Quadros (project creator)
 * \[Add your name here if you contribute!]
 
+This project welcomes contributions from everyone! Feel free to fork, submit issues, or create pull requests to help improve the project.
+
 ## License
 
 This project uses the [GNU General Public License v3.0](LICENSE).
