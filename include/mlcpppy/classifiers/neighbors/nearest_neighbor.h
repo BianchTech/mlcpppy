@@ -17,18 +17,15 @@
 #ifndef NEAREST_NEIGHBOR_H
 #define NEAREST_NEIGHBOR_H
 #include <vector>
-
 #include "point.h"
 
-template <typename T = double, size_t N = 3>
+template<typename T, int N>
 class NearestNeighbor {
-       public:
-        using PointType = Point<T, N>;
-        virtual ~NearestNeighbor() = default;
-        virtual std::vector<PointType> KNearestNeighbor(const PointType &,
-                                                        int) = 0;
-        virtual void Insert(const PointType &) = 0;
-        virtual void BuildTree(const std::vector<PointType> &) = 0;
-        virtual void Delete(const PointType &) {};
+ public:
+  virtual ~NearestNeighbor() = default;
+  virtual std::vector<Point<T, N>> KNearestNeighbor(Point<T, N>, int) = 0;
+  virtual void Insert(Point<T, N>) = 0;
+  virtual void BuildTree(std::vector<Point<T, N>>) = 0;
+  virtual void Delete(Point<T, N>){};
 };
 #endif  // NEAREST_NEIGHBOR_H

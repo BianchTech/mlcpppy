@@ -22,7 +22,7 @@
 #include <stdexcept>
 #include <type_traits>
 
-template <typename T = double, size_t N = 3,
+template <typename T = double, int N = 3,
           typename =
               typename std::enable_if<std::is_floating_point<T>::value>::type>
 class Point {
@@ -40,6 +40,9 @@ class Point {
                 std::copy(list.begin(), list.end(), data_.begin());
         }
         const std::array<T, N> &data() const { return data_; }
+        const size_t size() const {
+                return data_.size();
+        }
 };
 
-#endif
+#endif // POINT_H

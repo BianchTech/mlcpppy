@@ -21,17 +21,17 @@ int main(int argc, char const *argv[]) {
             {1.0, 2.0}, {2.0, 1.0}, {3.0, 2.0}, {7.0, 4.0}, {5.0, 9.0},
             {6.0, 1.0}, {0.0, 3.0}, {4.0, 7.0}, {8.0, 2.0}, {3.0, 5.0}};
 
-        auto tree = new KDTree();
+        auto tree = new KDTree<double, 2>();
         tree->BuildTree(points);
         tree->PrintInorder();
 
-        std::vector<std::vector<int>> points_knn =
+        std::vector<Point<double, 2>> points_knn =
             tree->KNearestNeighbor(Point<double, 2>({x, y}), k);
 
         for (size_t i = 0; i < points_knn.size(); ++i) {
                 std::cout << "Point " << i << ": ";
                 for (size_t j = 0; j < points_knn[i].size(); ++j) {
-                        std::cout << points_knn[i][j] << " ";
+                        std::cout << points_knn[i].data().at(j) << " ";
                 }
                 std::cout << std::endl;
         }
