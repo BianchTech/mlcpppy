@@ -14,18 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef KNN_H
-#define KNN_H
+#ifndef ATTRIBUTE_H
+#define ATTRIBUTE_H
+#include <string>
+#include <variant>
+#include <vector>
 
-#include "classifier.h"
-
-class KNN : Classifier {
-       private:
-       public:
-        KNN(/* args */);
-        ~KNN();
-
-        void Train();
-        std::vector<double> Predict();
+class Attribute
+{
+public:
+    using ValueType = std::variant<int, double, float, std::string>;
+    Attribute(int v) : value(v) {}
+    Attribute(double v) : value(v) {}
+    Attribute(const std::string& v) : value(v) {}
+    const ValueType& getValue() const { return value; }
+    ~Attribute();
+private:
+    /* data */
+    ValueType value;
 };
-#endif  // KNN_H
+
+#endif // ATTRIBUTE_H

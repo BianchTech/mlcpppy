@@ -14,18 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef KNN_H
-#define KNN_H
+#ifndef INSTANCE_H
+#define INSTANCE_H
 
-#include "classifier.h"
+#include <vector>
+#include "attribute.h"
 
-class KNN : Classifier {
-       private:
-       public:
-        KNN(/* args */);
-        ~KNN();
-
-        void Train();
-        std::vector<double> Predict();
+class Instance
+{
+private:
+    std::vector<Attribute> values_instance_;
+public:
+    Instance(/* args */);
 };
-#endif  // KNN_H
+
+#endif // INSTANCE_H
