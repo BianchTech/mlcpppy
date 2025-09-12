@@ -14,18 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef KNN_H
-#define KNN_H
+#ifndef STREAM_CLASSIFIER_H
+#define STREAM_CLASSIFIER_H
 
-#include "classifier.h"
+#include <vector>
 
-class KNN : Classifier {
-       private:
+class StreamClassifier {
        public:
-        KNN(/* args */);
-        ~KNN();
-
-        void Train();
-        std::vector<double> Predict();
+        virtual void Train() = 0;
+        virtual std::vector<double> Predict() = 0;
+        virtual ~StreamClassifier() = default;
 };
-#endif  // KNN_H
+#endif  // STREAM_CLASSIFIER_H

@@ -16,10 +16,13 @@
  */
 #ifndef CLASSIFIER_H
 #define CLASSIFIER_H
+
+#include <vector>
+
 class Classifier {
        public:
-        virtual void train() = 0;
-        virtual int predict() = 0;
-        virtual ~Classifier() {}
+        virtual void Train() = 0;
+        virtual std::vector<double> Predict() = 0;
+        virtual ~Classifier() = default;
 };
 #endif  // CLASSIFIER_H
