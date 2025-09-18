@@ -19,6 +19,8 @@ target_include_directories(mlcpppy PUBLIC ${PROJECT_SOURCE_DIR}/include)
 # Executável de exemplo
 # -------------------------------
 add_executable(example_main examples/main.cpp)
+add_executable(example_instance examples/atributes_usage.cpp)
 
 # Linka a biblioteca ao executável
 target_link_libraries(example_main PRIVATE mlcpppy)
+target_link_libraries(example_instance PRIVATE mlcpppy)
