@@ -17,48 +17,55 @@
 #ifndef INSTANCE_H
 #define INSTANCE_H
 
-#include <vector>
 #include <iostream>
+#include <vector>
+
 #include "attribute.h"
 
 /**
  * @brief Represents a single instance consisting of multiple Attribute objects.
- * 
+ *
  * @note This class is still under development. Future features may include
  *       schema validation, type checking, and integration with ARFF datasets.
  */
-class Instance
-{
-private:
-    std::vector<Attribute> values_instance_; ///< Container for the attributes of this instance
+class Instance {
+       private:
+        std::vector<Attribute>
+            values_instance_;  ///< Container for the attributes of this
+                               ///< instance
 
-public:
-    /**
-     * @brief Constructs an Instance with a variable number of Attribute arguments.
-     * 
-     * @tparam Args Variadic template parameter representing Attribute types.
-     * @param args Attributes to include in this instance.
-     */
-    template<typename ... Args>
-    Instance(Args... args) {
-        values_instance_ = {args...};
-    }
-
-    /**
-     * @brief Overloads the stream insertion operator to print all attributes in the instance.
-     * @param os Output stream.
-     * @param inst The Instance object to print.
-     * @return Reference to the output stream.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Instance& inst) {
-        os << "[";
-        for (size_t i = 0; i < inst.values_instance_.size(); ++i) {
-            os << inst.values_instance_[i];
-            if (i != inst.values_instance_.size() - 1) os << ", "; // Comma between elements
+       public:
+        /**
+         * @brief Constructs an Instance with a variable number of Attribute
+         * arguments.
+         *
+         * @tparam Args Variadic template parameter representing Attribute
+         * types.
+         * @param args Attributes to include in this instance.
+         */
+        template <typename... Args>
+        Instance(Args... args) {
+                values_instance_ = {args...};
         }
-        os << "]";
-        return os;
-    }
+
+        /**
+         * @brief Overloads the stream insertion operator to print all
+         * attributes in the instance.
+         * @param os Output stream.
+         * @param inst The Instance object to print.
+         * @return Reference to the output stream.
+         */
+        friend std::ostream& operator<<(std::ostream& os,
+                                        const Instance& inst) {
+                os << "[";
+                for (size_t i = 0; i < inst.values_instance_.size(); ++i) {
+                        os << inst.values_instance_[i];
+                        if (i != inst.values_instance_.size() - 1)
+                                os << ", ";  // Comma between elements
+                }
+                os << "]";
+                return os;
+        }
 };
 
-#endif // INSTANCE_H
+#endif  // INSTANCE_H
