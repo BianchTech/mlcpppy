@@ -40,9 +40,7 @@ class Point {
                 std::copy(list.begin(), list.end(), data_.begin());
         }
         const std::array<T, N> &data() const { return data_; }
-        const size_t size() const {
-                return data_.size();
-        }
+        const size_t size() const { return data_.size(); }
 };
 
-#endif // POINT_H
+#endif  // POINT_H
