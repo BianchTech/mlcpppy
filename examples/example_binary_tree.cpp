@@ -1,6 +1,6 @@
 #include "mlcpppy/data_structures/binary_tree.h"
 
-int main(int argc, char const* argv[]) {
+int main() {
         BinaryTree<int>* binary_tree = new BinaryTree<int>();
         // Isso deixa desbalanceado
         // 20, 8, 22, 4, 12, 10, 14

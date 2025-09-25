@@ -6,6 +6,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# ---------------------------------
+# Flags de compilação (warnings + otimização)
+# ---------------------------------
+if (MSVC)
+    # Warnings fortes no MSVC
+    set(COMMON_FLAGS /W4 /permissive- /O2)
+else()
+    # GCC/Clang: warnings + performance
+    set(COMMON_FLAGS -Wall -Wextra -Wpedantic -O3 -march=native)
+endif()
+
+# Aplica a todos os targets
+add_compile_options(${COMMON_FLAGS})
+
 # -------------------------------
 # Biblioteca mlcpppy
 # -------------------------------
@@ -16,7 +30,7 @@ add_library(mlcpppy SHARED ${MLCPP_SOURCES})
 target_include_directories(mlcpppy PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # -------------------------------
-# Executável de exemplo
+# Executáveis de exemplo
 # -------------------------------
 add_executable(example_main examples/main.cpp)
 add_executable(example_instance examples/atributes_usage.cpp)

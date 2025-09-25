@@ -2,7 +2,7 @@
 
 #include "mlcpppy/instances/instances.h"
 
-int main(int argc, char const *argv[]) {
+int main() {
         // Exemplo de uso da classe atribute, instances e instance
         Instance a(Attribute(1), Attribute(2.5), Attribute("Pedro"));
         Instance b(Attribute(1), Attribute(2.5), Attribute("Pedro"));

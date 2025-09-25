@@ -33,24 +33,17 @@ class KDTree : public NearestNeighbor<T, N> {
                 Point<T, N> point_;
                 int depth_;
 
-                explicit Node() {}
-                explicit Node(Point<T, N> point, Node* left, Node* right)
-                    : point_(point), left_(left), right_(right) {}
-                explicit Node(Point<T, N> point, Node* left, Node* right,
-                              int depth)
-                    : point_(point),
-                      left_(left),
-                      right_(right),
-                      depth_(depth) {}
-                explicit Node(Point<T, N> point) : point_(point) {
-                        this->left_ = nullptr;
-                        this->right_ = nullptr;
-                }
-                explicit Node(Point<T, N> point, int depth)
-                    : point_(point), depth_(depth) {
-                        this->left_ = nullptr;
-                        this->right_ = nullptr;
-                }
+        explicit Node() {}
+        explicit Node(Node* left, Node* right, Point<T, N> point) : left_(left), right_(right), point_(point) {}
+        explicit Node(Node* left, Node* right, Point<T, N> point, int depth) : left_(left), right_(right), point_(point), depth_(depth) {}
+        explicit Node(Point<T, N> point) : point_(point) {
+            this->left_ = nullptr;
+            this->right_ = nullptr;
+        }
+        explicit Node(Point<T, N> point, int depth) : point_(point), depth_(depth) {
+            this->left_ = nullptr;
+            this->right_ = nullptr;
+        }
 
                 ~Node() {
                         delete left_;
@@ -59,7 +52,7 @@ class KDTree : public NearestNeighbor<T, N> {
         };
 
         Node* root_;
-        int K_;
+        size_t K_;
         std::priority_queue<std::pair<double, Node*>> bests_;
 
         Node* Build(std::vector<Point<T, N>> points, int depth) {
@@ -80,10 +73,15 @@ class KDTree : public NearestNeighbor<T, N> {
                 std::vector<Point<T, N>> points_right(
                     points.begin() + median + 1, points.end());
 
-                return new Node(points.at(median),
-                                Build(points_left, depth + 1),
-                                Build(points_right, depth + 1), depth);
-        }
+
+        return new Node(
+            Build(points_left, depth + 1),
+            Build(points_right, depth + 1),
+            points.at(median),
+            depth
+        );
+    }
+
 
         Node* NearestNeighbor(Node* root, Point<T, N>& target, int depth) {
                 if (root == nullptr) return nullptr;
@@ -251,7 +249,7 @@ class KDTree : public NearestNeighbor<T, N> {
                         return;
                 }
 
-                int initial_size = points.at(0).size();
+        size_t initial_size = points.at(0).size();
 
                 for (auto& point : points) {
                         if (point.data().empty()) {
