@@ -17,10 +17,7 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
-#include <iostream>
-#include <string>
-#include <variant>
-#include <vector>
+#include "../types.h"
 
 /**
  * @brief Represents a single attribute that can hold multiple types of values.
@@ -31,27 +28,11 @@
  */
 class Attribute {
        public:
-        using ValueType =
-            std::variant<int, double, float,
-                         std::string>;  ///< Supported types for the attribute
-
         /**
          * @brief Constructs an Attribute with an int value.
          * @param v The integer value to store.
          */
-        Attribute(int v) : value(v) {}
-
-        /**
-         * @brief Constructs an Attribute with a double value.
-         * @param v The double value to store.
-         */
-        Attribute(double v) : value(v) {}
-
-        /**
-         * @brief Constructs an Attribute with a string value.
-         * @param v The string value to store.
-         */
-        Attribute(const std::string& v) : value(v) {}
+        Attribute(const ValueType& v) : value(v) {}
 
         /**
          * @brief Returns a constant reference to the stored value.

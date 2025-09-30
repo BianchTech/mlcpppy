@@ -18,6 +18,7 @@
 #define KNN_H
 
 #include "classifier.h"
+#include "../../types.h"
 
 class KNN : Classifier {
        private:
@@ -26,6 +27,6 @@ class KNN : Classifier {
         ~KNN();
 
         void Train();
-        std::vector<double> Predict();
+        Vec<double> Predict();
 };
 #endif  // KNN_H

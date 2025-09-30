@@ -35,6 +35,9 @@ class Instance {
                                ///< instance
 
        public:
+        Instance() {}
+
+
         /**
          * @brief Constructs an Instance with a variable number of Attribute
          * arguments.

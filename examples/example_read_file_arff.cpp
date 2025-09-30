@@ -8,6 +8,7 @@ int main()
     while (reader->HasNext())
     {
         Instance inst  = reader->NextInstance();
+        cout << inst << endl;
     }
     
     return 0;

@@ -27,8 +27,30 @@ private:
     Vec<String> attributes_;
     bool inData_ = false;
 
+    ValueType parseToken(const std::string& token) {
+        auto t = token;
+        {
+            long val;
+            auto [ptr, ec] = std::from_chars(t.data(), t.data() + t.size(), val);
+            if (ec == std::errc() && ptr == t.data() + t.size()) {
+                return val;
+            }
+        }
+
+        try {
+            size_t idx;
+            double d = std::stod(t, &idx);
+            if (idx == t.size()) {
+                return d;
+            }
+        } catch (...) {
+            return t;
+        }
+        
+    }
+
 public:
-    ReadArffFile(const String& name_file) : name_file_(name_file) {}
+    explicit inline ReadArffFile(const String& name_file) : name_file_(name_file) {}
 
     void LoadFile() {
         file_.open(name_file_);
@@ -57,7 +79,7 @@ public:
     }
 
     bool HasNext() {
-        return file_.good();
+        return file_.is_open() && file_.peek() != EOF;
     }
 
     Instance NextInstance() {
@@ -65,17 +87,21 @@ public:
         while (std::getline(file_, line)) {
             if (line.empty() || line[0] == '%') continue;
 
-            Instance inst;
-            // std::istringstream iss(line);
-            // String token;
-            // while (std::getline(iss, token, ',')) {
-            //     // trim
-            //     token.erase(0, token.find_first_not_of(" \t\r\n"));
-            //     token.erase(token.find_last_not_of(" \t\r\n") + 1);
-            //     inst.values.push_back(token);
-            // }
-            // return inst;
-            return new Instance;
+            std::istringstream iss(line);
+            Vec<Attribute> attributes_list;
+            String token;
+            while (std::getline(iss, token, ',')) {
+                // trim
+                auto start = token.find_first_not_of(" \t\r\n");
+                auto end   = token.find_last_not_of(" \t\r\n");
+                if (start == String::npos) {
+                    token.clear();
+                } else {
+                    token = token.substr(start, end - start + 1);
+                }
+                attributes_list.push_back(parseToken(token));
+            }
+            return Instance(attributes_list);
         }
         throw std::out_of_range("No more instances");
     }
