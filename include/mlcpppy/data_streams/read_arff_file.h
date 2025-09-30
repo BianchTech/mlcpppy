@@ -63,15 +63,16 @@ public:
         while (std::getline(file_, line)) {
             if (line.empty() || line[0] == '%') continue;
 
-            String lower = line;
-            for (auto &c : lower) c = std::tolower(c);
-
-            if (lower.find("@attribute") == 0) {
+            if (line.find("@attribute") == 0) {
+                // Aqui está os dados importantes para gerar o cabeçalho
+                // Ainda não estou gardando eles
+                // Nessa parte criar o map para quando o valor for categorico
+                // Para usar apenas numeros
                 std::istringstream iss(line);
                 String atSign, name, type;
                 iss >> atSign >> name >> type;
                 attributes_.push_back(name);
-            } else if (lower.find("@data") == 0) {
+            } else if (line.find("@data") == 0) {
                 inData_ = true;
                 break; // para no começo dos dados
             }
